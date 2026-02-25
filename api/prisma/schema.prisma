@@ -5,10 +5,34 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "mysql"
 }
+
+enum TaskStatus {
+  OPEN
+  ONGOING
+  DONE
+  DELETED
+}
+
+model User {
+  id        Int         @id @default(autoincrement())
+  name      String      
+  tasks     Task[]      
+  active    Boolean     @default(true)
+}
+
+model Task {
+  id             Int             @id @default(autoincrement())
+  description    String      
+  userId         Int         
+  user           User            @relation(fields: [userId], references: [id])          
+  status         TaskStatus      @default(OPEN)
+  date           DateTime?       
+  active         Boolean         @default(true)
+}
+
