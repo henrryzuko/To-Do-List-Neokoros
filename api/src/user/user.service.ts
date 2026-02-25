@@ -14,13 +14,14 @@ export class UserService {
         return this.prisma.user.findMany({ include: { tasks: true } });
     };
 
-    async getUserById(id: number, active: boolean): Promise<User | null> {
-        return this.prisma.user.findFirst({
-            where: {
-                id,
-                active,
-            }
-        });
+    async getUserById(id: number, onlyActive?: boolean): Promise<User | null> {
+        const whereParams: any = { id };
+
+        if (onlyActive !== undefined) {
+            whereParams.active = onlyActive;
+        }
+        
+        return this.prisma.user.findFirst({ where: whereParams });
     };
 
     async updateUser(id: number, data: Partial<{ name: string}>): Promise<User> {

@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Param, Put, Body, Query } from '@nestjs/common';
+import { Controller, Post, Get, Param, Put, Patch, Body, Query } from '@nestjs/common';
 import { TaskService } from './task.service';
 import { TaskStatus } from '@prisma/client';
 
@@ -19,10 +19,14 @@ export class TaskController {
     @Get(':id')
     findOne(
         @Param('id') id: string,
-        @Query('onlyActive') onlyActive: string,
+        @Query('onlyActive') onlyActive?: string,
     ) {
-        const active = onlyActive !== 'false';
-        return this.taskService.getTaskById(Number(id), active);
+        let onlyActiveFilter: boolean | undefined = onlyActive === undefined ? true : onlyActive === 'true'
+
+        if (onlyActive === 'true') onlyActiveFilter = true;
+        if (onlyActive === 'false') onlyActiveFilter = false;
+
+        return this.taskService.getTaskById(Number(id), onlyActiveFilter);
     }
 
     @Put(':id')
@@ -30,8 +34,8 @@ export class TaskController {
         return this.taskService.updateTask(Number(id), body);
     }
 
-    @Put(':id')
-    delete(@Param('id') id: string, @Body() body: Partial<{ active: false }>) {
-        return this.taskService.deleteTask(Number(id), body);
+    @Patch(':id/deactivate')
+    deactivate(@Param('id') id: string) {
+        return this.taskService.deleteTask(Number(id), { active: false });
     }
 }

@@ -16,13 +16,14 @@ export class TaskService {
         return this.prisma.task.findMany();
     };
 
-    async getTaskById(id: number, active: boolean): Promise<Task | null> {
-        return this.prisma.task.findFirst({
-            where: {
-                id,
-                active,
-            }
-        });
+    async getTaskById(id: number, onlyActive?: boolean): Promise<Task | null> {
+        const whereParams: any = { id };
+
+        if (onlyActive !== undefined) {
+            whereParams.active = onlyActive;
+        }
+        
+        return this.prisma.task.findFirst({ where: whereParams });
     };
 
     async updateTask(id: number, data: Partial<{ description: string, status: TaskStatus, date: string | null}>): Promise<Task> {

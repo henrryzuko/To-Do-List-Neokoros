@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Param, Put, Body, Query } from '@nestjs/common';
+import { Controller, Post, Get, Param, Put, Patch, Body, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 
 @Controller('user')
@@ -18,10 +18,14 @@ export class UserController {
     @Get(':id')
     findOne(
         @Param('id') id: string,
-        @Query('onlyActive') onlyActive: string,
+        @Query('onlyActive') onlyActive?: string,
     ) {
-        const active = onlyActive !== 'false';
-        return this.userService.getUserById(Number(id), active);
+        let onlyActiveFilter: boolean | undefined = onlyActive === undefined ? true : onlyActive === 'true'
+
+        if (onlyActive === 'true') onlyActiveFilter = true;
+        if (onlyActive === 'false') onlyActiveFilter = false;
+        
+        return this.userService.getUserById(Number(id), onlyActiveFilter);
     }
 
     @Put(':id')
@@ -29,8 +33,8 @@ export class UserController {
         return this.userService.updateUser(Number(id), body);
     }
 
-    @Put(':id')
-    delete(@Param('id') id: string, @Body() body: Partial<{ active: false }>) {
-        return this.userService.deleteUser(Number(id), body);
+    @Patch(':id/deactivate')
+    deactivate(@Param('id') id: string) {
+        return this.userService.deleteUser(Number(id), { active: false });
     }
 }
