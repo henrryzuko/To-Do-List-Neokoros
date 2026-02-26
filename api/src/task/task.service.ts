@@ -13,7 +13,7 @@ export class TaskService {
     };
 
     async getAllTasks(userId: number): Promise<Task[]> {
-        return this.prisma.task.findMany({ where: { id: userId } });
+        return this.prisma.task.findMany({ where: { userId } });
     };
 
     async getTaskById(id: number, onlyActive?: boolean): Promise<Task | null> {

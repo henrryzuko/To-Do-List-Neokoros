@@ -25,10 +25,10 @@ export default function LoginPage() {
         <div>
             <h1>Login</h1>
             {error && <p style={{ color: "red" }}>{error}</p>}
-            <input placeholder="Email" onChange={(event) => setEmail(event.target.value)} />
-            <input placeholder="Password" type="password" onChange={(event) => setPassword(event.target.value)} />
-            <button onClick={handleLogin}>Login</button>
-            <button onClick={() => navigate("/register")}>Cadastre-se</button>
+            <input style={{ margin: 5 }} placeholder="Email" onChange={(event) => setEmail(event.target.value)} />
+            <input style={{ margin: 5 }} placeholder="Password" type="password" onChange={(event) => setPassword(event.target.value)} />
+            <button style={{ margin: 5 }} onClick={handleLogin}>Login</button>
+            <button style={{ margin: 5 }} onClick={() => navigate("/register")}>Cadastre-se</button>
         </div>
     );
 }

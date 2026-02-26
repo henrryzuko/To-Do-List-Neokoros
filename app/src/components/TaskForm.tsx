@@ -31,8 +31,8 @@ export default function TaskForm({ onCreated }: FormProps) {
             setDate("");
 
             onCreated();
-        } catch (error) {
-            setError("Falha ao criar Tarefa");
+        } catch (error: any) {
+            setError(`Falha ao criar Tarefa.`);
         } finally {
             setLoading(false);
         }

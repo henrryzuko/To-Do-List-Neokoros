@@ -49,29 +49,30 @@ export default function RegisterForm({ onSubmit }: FormProps) {
 
     return (
         <div style={{ maxWidth: 400, margin: "auto" }}>
-            <h2>Register</h2>
-
             {error && <p style={{ color: "red" }}>{error}</p>}
 
             <input
+                style={{ margin: 5 }}
                 placeholder="Nome"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
             />
 
             <input
+                style={{ margin: 5 }}
                 placeholder="Email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
             />
 
             <input
+                style={{ margin: 5 }}
                 placeholder="Senha"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
             />
 
-            <button onClick={handleSubmit} disabled={loading}>
+            <button style={{ margin: 5 }} onClick={handleSubmit} disabled={loading}>
                 {loading ? "Aguarde..." : "Criar Usuário"}
             </button>
 
