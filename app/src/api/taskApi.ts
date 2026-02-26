@@ -35,6 +35,6 @@ export const updateTaskStatus = async (id: number, status: TaskStatus): Promise<
 };
 
 export const deactivateTask = async (id: number): Promise<Task> => {
-    const response = await api.put(`/task/${id}/deactivate`);
+    const response = await api.patch(`/task/${id}/deactivate`);
     return response.data;
 };

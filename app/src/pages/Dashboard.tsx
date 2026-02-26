@@ -50,9 +50,14 @@ export default function Dashboard() {
 
                     <span style={{ marginLeft: "10px" }}>Progresso: {task.status}</span>
 
-                    <span style={{ marginLeft: "10px", color: "red", cursor: "pointer"   }} onClick={async () => {
-                        await deactivateTask(task.id);
-                        setTasks((taskList) => taskList.filter((t) => t.id !== task.id));
+                    <span style={{ marginLeft: "10px", color: "red", cursor: "pointer"  }} onClick={async () => {
+                        try {
+                            
+                            await deactivateTask(task.id);
+                            setTasks((taskList) => taskList.filter((t) => t.id !== task.id));
+                        } catch (err) {
+                            console.log("fail", err)
+                        }
                     }}>Remover</span>
                 </div>
             ))}
