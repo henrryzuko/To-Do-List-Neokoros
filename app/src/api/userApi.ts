@@ -1,4 +1,4 @@
-import { api } from "../api/api";
+import { api } from "./api";
 
 export interface User {
     id: number;
@@ -21,7 +21,7 @@ export const getUsers = async (): Promise<User[]> => {
     return response.data;
 };
 
-export const createUser = async (name: string): Promise<User> => {
-    const response = await api.post("/user", { name })
+export const createUser = async (name: string, email: string, password: string): Promise<User> => {
+    const response = await api.post("/user", { name, email, password });
     return response.data;
 };

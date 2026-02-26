@@ -1,19 +1,23 @@
-import { Controller, Post, Get, Param, Put, Patch, Body, Query } from '@nestjs/common';
-import { TaskService } from './task.service';
+import { Controller, Post, Get, Param, Put, Patch, Body, Query, UseGuards, Req } from '@nestjs/common';
 import { TaskStatus } from '@prisma/client';
+import { AuthGuard } from '@nestjs/passport';
+import { TaskService } from './task.service';
 
 @Controller('task')
 export class TaskController {
     constructor(private readonly taskService: TaskService) {}
 
+    @UseGuards(AuthGuard('jwt'))
     @Post()
-    create(@Body() body: { description: string; userId: number; status?: TaskStatus; date?: string }) {
-        return this.taskService.createTask(body.description, body.userId, body.status, body.date);
+    create(@Req() req, @Body() body: { description: string; status?: TaskStatus; date?: string }) {
+        const userId = req.user.userId;
+        return this.taskService.createTask(body.description, userId, body.status, body.date);
     }
 
+    @UseGuards(AuthGuard('jwt'))
     @Get()
-    findAll() {
-        return this.taskService.getAllTasks();
+    findAll(@Req() req) {
+        return this.taskService.getAllTasks(req.user.id);
     }
 
     @Get(':id')
@@ -36,6 +40,6 @@ export class TaskController {
 
     @Patch(':id/deactivate')
     deactivate(@Param('id') id: string) {
-        return this.taskService.deleteTask(Number(id), { active: false });
+        return this.taskService.deleteTask(Number(id), { status: TaskStatus.DELETED, active: false });
     }
 }

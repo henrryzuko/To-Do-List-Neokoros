@@ -21,10 +21,12 @@ enum TaskStatus {
 }
 
 model User {
-  id        Int         @id @default(autoincrement())
-  name      String      
-  tasks     Task[]      
-  active    Boolean     @default(true)
+  id          Int         @id @default(autoincrement())
+  name        String  
+  email       String      @unique
+  password    String     
+  tasks       Task[]      
+  active      Boolean     @default(true)
 }
 
 model Task {

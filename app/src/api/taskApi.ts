@@ -1,11 +1,10 @@
-import { api } from "../api/api";
+import { api } from "./api";
 import type { Task } from "./userApi";
 import { TaskStatuses, type TaskStatus } from "../types/taskStatus";
 
 export interface CreateTaskInput {
     description: string;
-    userId: number;
-    date?: string;
+    date?: string | null;
 }
 
 export const getTasks = async (): Promise<Task[]> => {
@@ -20,14 +19,14 @@ export const createTask = async (input: CreateTaskInput): Promise<Task> => {
 
 export const updateTask = async (
     id: number,
-    data: Partial<{ description: string; status: string; date: string }>
+    data: Partial<{ description: string; status: TaskStatus; date: string | null }>
 ): Promise<Task> => {
-    const response = await api.put(`/tasks/${id}`, data);
+    const response = await api.put(`/task/${id}`, data);
     return response.data;
 };
 
-export const updateTaskStatus = async (id: number, status: string): Promise<Task> => {
-    if (!TaskStatuses.includes(status as TaskStatus)) {
+export const updateTaskStatus = async (id: number, status: TaskStatus): Promise<Task> => {
+    if (!TaskStatuses.includes(status)) {
         throw new Error("Invalid Status");
     }
 
@@ -36,6 +35,6 @@ export const updateTaskStatus = async (id: number, status: string): Promise<Task
 };
 
 export const deactivateTask = async (id: number): Promise<Task> => {
-    const response = await api.put(`/task/${id}/deactivate`, { active: false });
+    const response = await api.put(`/task/${id}/deactivate`);
     return response.data;
 };

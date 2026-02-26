@@ -12,8 +12,8 @@ export class TaskService {
         });
     };
 
-    async getAllTasks(): Promise<Task[]> {
-        return this.prisma.task.findMany();
+    async getAllTasks(userId: number): Promise<Task[]> {
+        return this.prisma.task.findMany({ where: { id: userId } });
     };
 
     async getTaskById(id: number, onlyActive?: boolean): Promise<Task | null> {
@@ -47,7 +47,7 @@ export class TaskService {
         });
     };
 
-    async deleteTask(id: number, data: Partial<{ active: boolean }>): Promise<Task> {
+    async deleteTask(id: number, data: Partial<{ status: TaskStatus, active: boolean }>): Promise<Task> {
         return this.prisma.task.update({ where: { id }, data });
     };
 }
