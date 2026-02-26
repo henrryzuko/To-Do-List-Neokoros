@@ -4,7 +4,7 @@ import PrivateRoute from './routes/PrivateRoute';
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard";
-import './App.css'
+import './styles/App.css'
 
 function App() {
   return (
