@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { deactivateTask, getTasks, updateTaskStatus } from "../api/taskApi";
 import { TaskStatuses, type TaskStatus } from "../types/taskStatus";
 import { useAuth } from "../contexts/AuthContext";
@@ -8,6 +9,7 @@ export default function Dashboard() {
     const [tasks, setTasks] = useState<any[]>([]);
 
     const { logout } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         loadTasks();
@@ -22,6 +24,11 @@ export default function Dashboard() {
         await updateTaskStatus(taskId, newStatus);
         loadTasks();
     };
+
+    const handleLogout = () => {
+        logout();
+        navigate("/login", { replace: true });
+    }
 
     return (
         <div>
@@ -62,7 +69,7 @@ export default function Dashboard() {
                 </div>
             ))}
 
-            <button style={{ margin: 10 }} onClick={() => logout()}>Sair</button>
+            <button style={{ margin: 10 }} onClick={handleLogout}>Sair</button>
         </div>
     );
 }
