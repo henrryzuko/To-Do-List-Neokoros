@@ -15,7 +15,7 @@ Backend
 - Prisma
 
 Database
-- PostgreSQL
+- MySQL
 
 
 ## Funcionalidades
@@ -29,7 +29,7 @@ Database
 
 ## Arquiterura
 
-Client → API → Prisma ORM → PostgreSQL
+Client → API → Prisma ORM → MySQL
 
 Client (React)
      │
@@ -47,7 +47,7 @@ Service Layer
 Prisma ORM
      │
      ▼
-PostgreSQL
+MySQL
 
 
 ## API Routes
