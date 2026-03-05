@@ -7,7 +7,6 @@ Aplicação para gerenciamento de tarefas utilizando tecnologias modernas em des
 Frontend
 - React
 - TypeScript
-- Tailwind
 
 Backend
 - Node.js
