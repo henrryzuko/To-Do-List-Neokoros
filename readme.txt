@@ -1,35 +1,62 @@
----  Configuração Back-End  ---
+# Neokoros Task Manager
 
-    -> cd api
-    -> npm install
+Aplicação para gerenciamento de tarefas utilizando tecnologias modernas em desenvolvimento Web Ful-sctack.
 
-    # .env
+## Tech Stack
 
-        -> DATABASE_URL=mysql://'username':'password'@localhost:3306/to_do_neo_db
-        -> JWT_SECRET=topsecret
+Frontend
+- React
+- TypeScript
+- Tailwind
 
-    # MySQL
+Backend
+- Node.js
+- Express
+- Prisma
 
-        -> CREATE DATABASE to_do_neo_db;
+Database
+- PostgreSQL
 
-    # Prisma
+## Funcionalidades
 
-        -> npx prisma migrate deploy
-        -> npx prisma generate
-        -> npx prisma studio (opcional, se quiser acompnhar o banco)
+- Autenticação de usuário
+- Criação / edição de tarefas
+- Gerenciamento de status das tarefas
+- API REST
+- Rotas privadas seguras
 
-    -> npm run start:dev (NestJS Backend: http://localhost:3000, CORS Frontend Disponível: http://localhost:5173)
+## Arquiterura
 
+Client → API → Prisma ORM → PostgreSQL
 
+## Execução local
 
----  Configuração Front-End  ---
+git clone https://github.com/henrryzuko/To-Do-List-Neokoros
 
-    -> cd app
-    -> npm install
-    -> npm run dev (React + Vit Frontend: http://localhost:5173)
+## Back-End
 
-    Obs.: Olhar dentro de /app/src/api/api.ts se a baseURL está conectada à URL do Backedn
+- cd api
+- npm install
 
+## .env
 
+- DATABASE_URL=mysql://'username':'password'@localhost:3306/to_do_neo_db
+- JWT_SECRET=topsecret
 
----
+## MySQL
+
+- CREATE DATABASE to_do_neo_db;
+
+## Prisma
+
+- npx prisma migrate deploy
+- npx prisma generate
+- npx prisma studio (opcional, se quiser acompnhar o banco)
+- npm run start:dev (NestJS Backend: http://localhost:3000, CORS Frontend Disponível: http://localhost:5173)
+
+## Front-End
+
+- cd app
+- npm install
+- npm run dev (React + Vit Frontend: http://localhost:5173)
+Obs.: Olhar dentro de /app/src/api/api.ts se a baseURL está conectada à URL do Backend
