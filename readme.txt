@@ -1,6 +1,6 @@
 # Neokoros Task Manager
 
-Aplicação para gerenciamento de tarefas utilizando tecnologias modernas em desenvolvimento Web Ful-sctack.
+Aplicação para gerenciamento de tarefas utilizando tecnologias modernas em desenvolvimento Web Ful-stack.
 
 ## Tech Stack
 
